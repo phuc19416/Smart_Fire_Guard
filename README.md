@@ -155,8 +155,3 @@ SmartFireGuard/
 ---
 
 ## 👨‍💻 Tác giả
-Họ và tên: Lê Phước Hậu
-
-Lớp/MSSV: 2033221314 - Nhóm 16
-
-Dự án: Đồ án IoT/AI - Smart Fire Guard (Bản nâng cấp YOLOv11)

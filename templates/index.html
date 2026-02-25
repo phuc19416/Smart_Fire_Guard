@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Smart Fire Guard Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-box {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .safe {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .danger {
+            background: #f8d7da;
+            color: #721c24;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        #log {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔥 Smart Fire Guard System</h1>
+    <div class="container">
+        <div class="card">
+            <h3>Camera Live Feed (AI Detection)</h3>
+            <img src="{{ url_for('video_feed') }}" width="100%" style="border-radius: 4px;">
+            <div id="alert-box" class="status-box safe">SYSTEM NORMAL</div>
+        </div>
+        <div class="card">
+            <h3>System Logs</h3>
+            <div id="log"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateDashboard() {
+            $.getJSON('/api/data', function (data) {
+                // Update Alert Box
+                var box = $('#alert-box');
+                if (data.alarm) {
+                    box.text("⚠️ CẢNH BÁO NGUY HIỂM! ⚠️");
+                    box.removeClass('safe').addClass('danger');
+                } else {
+                    box.text("System Safe - Monitoring...");
+                    box.removeClass('danger').addClass('safe');
+                }
+
+                // Update Log
+                var logHtml = data.log.map(l => `<div>${l}</div>`).join('');
+                $('#log').html(logHtml);
+            });
+        }
+        setInterval(updateDashboard, 1000); // Refresh mỗi 1s
+    </script>
+</body>
+
+</html>

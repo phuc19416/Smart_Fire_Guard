@@ -1,0 +1,25 @@
+# Môi trường ảo Python
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Dataset (Rất nặng, không nên đẩy lên Git)
+dataset/
+dataset_yolo/
+
+# Thư mục chứa kết quả train YOLO (Chứa rất nhiều ảnh test và biểu đồ)
+# Chỉ nên giữ lại file trọng số cấu hình (best.pt) nếu muốn
+runs/
+
+# Các file trọng số tải từ mạng (tránh nặng repo)
+yolo11n.pt
+*.h5
+
+# Thư mục rác của OS
+.DS_Store
+Thumbs.db
+
+train/
+test/
