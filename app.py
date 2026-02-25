@@ -13,8 +13,8 @@ system_status = {
 # --- 1. AI MODEL LOAD ---
 try:
     # Mặc định load model YOLOv11 nano (tự động tải nếu chưa có)
-    # Nếu bạn đã tự train mô hình, hãy đổi thành: YOLO('runs/detect/fire_yolov11_detection/weights/best.pt')
-    model = YOLO(r'runs\detect\fire_yolov11_detection5\weights\best.pt') 
+    # Nếu bạn đã tự train mô hình, hãy đổi thành: YOLO('fire_yolo_model.pt')
+    model = YOLO('fire_yolo_model.pt') 
     YOLO_MODE = True
     print("AI Model (YOLO) Loaded!")
 except Exception as e:
